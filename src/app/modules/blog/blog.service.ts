@@ -18,8 +18,8 @@ const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
 };
 const deleteBlogFromDB = async (id: string) => {
   // const result = await Blog.findByIdAndUpdate(id, payload, { new: true });
-  const result = await Blog.findByIdAndDelete(id);
-  return result;
+  await Blog.findByIdAndDelete(id);
+  return await Blog.findById(id);
 };
 
 const getAllBlogsFromDB = async (query: Record<string, unknown>) => {

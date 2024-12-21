@@ -41,11 +41,13 @@ const findAuthorId = async (email: string) => {
 export const updateOrDeleteAuth = () => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.user;
+    const { id } = req.params;
+    const isBlogExist = await Blog.findById(id);
+    if (!isBlogExist) {
+      throw new AppError(404, 'Blog not found');
+    }
     const authorId = await findAuthorId(email);
-    const authorsBlogs = await Blog.find({ author: authorId });
-    const isAuthorUpdatingHisBlog = authorsBlogs.find((el) =>
-      el._id.equals(req.params.id),
-    );
+    const isAuthorUpdatingHisBlog = isBlogExist.author.equals(authorId);
     if (!isAuthorUpdatingHisBlog) {
       throw new AppError(404, 'You do not created this blog');
     }

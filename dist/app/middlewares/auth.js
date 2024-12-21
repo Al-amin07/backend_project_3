@@ -45,9 +45,13 @@ const findAuthorId = (email) => __awaiter(void 0, void 0, void 0, function* () {
 const updateOrDeleteAuth = () => {
     return (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         const { email } = req.user;
+        const { id } = req.params;
+        const isBlogExist = yield blog_model_1.Blog.findById(id);
+        if (!isBlogExist) {
+            throw new AppError_1.default(404, 'Blog not found');
+        }
         const authorId = yield findAuthorId(email);
-        const authorsBlogs = yield blog_model_1.Blog.find({ author: authorId });
-        const isAuthorUpdatingHisBlog = authorsBlogs.find((el) => el._id.equals(req.params.id));
+        const isAuthorUpdatingHisBlog = isBlogExist.author.equals(authorId);
         if (!isAuthorUpdatingHisBlog) {
             throw new AppError_1.default(404, 'You do not created this blog');
         }

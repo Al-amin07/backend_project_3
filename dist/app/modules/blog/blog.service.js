@@ -30,8 +30,8 @@ const updateBlogIntoDB = (id, payload) => __awaiter(void 0, void 0, void 0, func
 });
 const deleteBlogFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     // const result = await Blog.findByIdAndUpdate(id, payload, { new: true });
-    const result = yield blog_model_1.Blog.findByIdAndDelete(id);
-    return result;
+    yield blog_model_1.Blog.findByIdAndDelete(id);
+    return yield blog_model_1.Blog.findById(id);
 });
 const getAllBlogsFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
     // const queryObj = { ...query };
