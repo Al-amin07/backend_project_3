@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import config from '../config';
 import { ZodError } from 'zod';
@@ -12,8 +13,9 @@ const globalErrorHandler = (
   err: any,
   req: Request,
   res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
-) => {
+): any => {
   let message = 'Validation Erroreee';
   let status = 500;
   let details: TErrorSources = [
@@ -31,7 +33,7 @@ const globalErrorHandler = (
     const simplifiedError = handleValidationError(err);
     status = simplifiedError?.statusCode;
     message = simplifiedError?.message;
-    details = simplifiedError?.errorSourses;
+    details = simplifiedError?.errorSources;
   } else if (err?.name === 'CastError') {
     const simplifiedError = handleCastError(err);
     status = simplifiedError?.statusCode;

@@ -1,4 +1,4 @@
-import express, { Handler } from 'express';
+import express from 'express';
 import { DefaultRoute } from './app/modules/routes';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import notFound from './app/middlewares/notFound';
