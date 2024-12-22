@@ -16,8 +16,13 @@ const deleteBlogFromDB = async (id: string) => {
   const result = await Blog.findByIdAndDelete(id);
   return result;
 };
+const getAllUserFromDB = async () => {
+  const result = await User.find({});
+  return result;
+};
 
 export const AdminServices = {
   blockUserFromDB,
   deleteBlogFromDB,
+  getAllUserFromDB,
 };

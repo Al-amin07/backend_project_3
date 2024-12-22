@@ -22,7 +22,12 @@ const deleteBlogFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield blog_model_1.Blog.findByIdAndDelete(id);
     return result;
 });
+const getAllUserFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.find({});
+    return result;
+});
 exports.AdminServices = {
     blockUserFromDB,
     deleteBlogFromDB,
+    getAllUserFromDB,
 };

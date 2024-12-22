@@ -13,6 +13,16 @@ const blockUser = catchAsync(async (req, res) => {
   });
 });
 
+const getAllUser = catchAsync(async (req, res) => {
+  const result = await AdminServices.getAllUserFromDB();
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    data: result,
+    message: 'Users retrived successfully',
+  });
+});
+
 const deleteBlog = catchAsync(async (req, res) => {
   const { id } = req.params;
   await AdminServices.deleteBlogFromDB(id);
@@ -27,4 +37,5 @@ const deleteBlog = catchAsync(async (req, res) => {
 export const AdminControllers = {
   blockUser,
   deleteBlog,
+  getAllUser,
 };

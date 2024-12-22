@@ -26,6 +26,15 @@ const blockUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
         message: 'User is Blocked successfully',
     });
 }));
+const getAllUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield admin_service_1.AdminServices.getAllUserFromDB();
+    (0, sendResponse_1.default)(res, {
+        statusCode: 200,
+        success: true,
+        data: result,
+        message: 'Users retrived successfully',
+    });
+}));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     yield admin_service_1.AdminServices.deleteBlogFromDB(id);
@@ -39,4 +48,5 @@ const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 exports.AdminControllers = {
     blockUser,
     deleteBlog,
+    getAllUser,
 };
