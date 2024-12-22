@@ -1,6 +1,6 @@
-# Car Store
+# Blog Application
 
-Car Store is an online platform that allows users to browse, order, update, and manage car listings. It offers a wide range of car entries, with functionalities to create, edit, delete, and track orders. Built with Node.js, Express, MongoDB, and Mongoose, it provides a seamless experience for managing car inventories and customer orders.
+The blog application allows users to create, manage, and view blog posts. Each blog post is associated with an author and may include additional features such as commenting, categories, and publishing dates.
 
 ## Technologies Used
 
@@ -13,10 +13,10 @@ Car Store is an online platform that allows users to browse, order, update, and 
 - **Prettier** - Code formatter for maintaining consistent code style.
 
 ## Features
-- CRUD operations for car entries
+- User Authentication and Authorization
 - Mongoose schema validation with proper error message
-- Environment variable configuration
-- Development and production modes
+- Blog Management
+- Search and Filtering on Blogs
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
