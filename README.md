@@ -46,8 +46,8 @@ Navigate to the project directory and install the necessary dependencies:
 ## 3. Set Up Environment Variables
 Create a .env file in the root of the project to store environment variables, such as MongoDB URI or any secret keys. Here’s an example:
 ```bash
-PORT=5000
-DB_URL=mongodb+srv://car_store:o7rRRjAeMw1lYPzJ@cluster0.pekpvn6.mongodb.net/carStore?retryWrites=true&w=majority&appName=Cluster0
+PORT=6000
+mongodb+srv://project3:c8S2MT1C3ONlIB9q@cluster0.pekpvn6.mongodb.net/project_3?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 ## 4. Run the Project
