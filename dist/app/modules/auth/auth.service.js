@@ -23,7 +23,8 @@ const registerNewUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, fun
         throw new AppError_1.default(400, 'User already exist');
     }
     const result = yield user_model_1.User.create(payload);
-    return result;
+    const { _id, name, email } = result;
+    return { _id, name, email };
 });
 const loginUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserExist = yield user_model_1.User.isUserExist(payload === null || payload === void 0 ? void 0 : payload.email);

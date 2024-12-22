@@ -5,7 +5,10 @@ import { Blog } from './blog.model';
 
 const createBlogIntoDB = async (payload: TBlog) => {
   const result = await Blog.create(payload);
-  return result;
+  const blogResult = await Blog.findById(result?._id)
+    .populate('author')
+    .select('_id title content author');
+  return blogResult;
 };
 
 const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
@@ -13,7 +16,11 @@ const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
   if (!isBlogExist) {
     throw new AppError(405, 'Blog not found!!!');
   }
-  const result = await Blog.findByIdAndUpdate(id, payload, { new: true });
+  const result = await Blog.findByIdAndUpdate(id, payload, {
+    new: true,
+  })
+    .populate('author')
+    .select('_id title content author');
   return result;
 };
 const deleteBlogFromDB = async (id: string) => {
@@ -57,7 +64,10 @@ const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
   // }
   // const filterQuery = await sortQuery.find(queryObj);
   // return filterQuery
-  const blogQuery = new QueryBuilder(Blog.find().populate('author'), query)
+  const blogQuery = new QueryBuilder(
+    Blog.find().populate('author').select('_id title content author'),
+    query,
+  )
     .search(['title', 'content'])
     .sort()
     .filter();
@@ -65,7 +75,9 @@ const getAllBlogsFromDB = async (query: Record<string, unknown>) => {
   return result;
 };
 const getSingleBlogsFromDB = async (id: string) => {
-  const result = await Blog.findById(id).populate('author');
+  const result = await Blog.findById(id)
+    .populate('author')
+    .select('_id title content author');
   return result;
 };
 

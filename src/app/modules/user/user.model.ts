@@ -15,6 +15,7 @@ const userSchema = new Schema<TUser, UserModel>(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     role: {
       type: String,
@@ -37,7 +38,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.statics.isUserExist = async function (email: string) {
-  return await User.findOne({ email });
+  return await User.findOne({ email }).select('+password');
 };
 userSchema.statics.isPasswordMatched = async function (
   password: string,

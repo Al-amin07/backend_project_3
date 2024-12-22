@@ -28,6 +28,7 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: true,
+        select: false,
     },
     role: {
         type: String,
@@ -49,7 +50,7 @@ userSchema.pre('save', function (next) {
 });
 userSchema.statics.isUserExist = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield exports.User.findOne({ email });
+        return yield exports.User.findOne({ email }).select('+password');
     });
 };
 userSchema.statics.isPasswordMatched = function (password, hashedpassword) {

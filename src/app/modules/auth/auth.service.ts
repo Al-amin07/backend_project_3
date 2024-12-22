@@ -10,7 +10,8 @@ const registerNewUserIntoDB = async (payload: TRegistration) => {
   }
 
   const result = await User.create(payload);
-  return result;
+  const { _id, name, email } = result;
+  return { _id, name, email };
 };
 
 const loginUserIntoDB = async (payload: TLogin) => {

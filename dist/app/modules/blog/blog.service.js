@@ -18,14 +18,21 @@ const AppError_1 = __importDefault(require("../errors/AppError"));
 const blog_model_1 = require("./blog.model");
 const createBlogIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield blog_model_1.Blog.create(payload);
-    return result;
+    const blogResult = yield blog_model_1.Blog.findById(result === null || result === void 0 ? void 0 : result._id)
+        .populate('author')
+        .select('_id title content author');
+    return blogResult;
 });
 const updateBlogIntoDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isBlogExist = yield blog_model_1.Blog.findById(id);
     if (!isBlogExist) {
         throw new AppError_1.default(405, 'Blog not found!!!');
     }
-    const result = yield blog_model_1.Blog.findByIdAndUpdate(id, payload, { new: true });
+    const result = yield blog_model_1.Blog.findByIdAndUpdate(id, payload, {
+        new: true,
+    })
+        .populate('author')
+        .select('_id title content author');
     return result;
 });
 const deleteBlogFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -65,7 +72,7 @@ const getAllBlogsFromDB = (query) => __awaiter(void 0, void 0, void 0, function*
     // }
     // const filterQuery = await sortQuery.find(queryObj);
     // return filterQuery
-    const blogQuery = new QueryBuilder_1.default(blog_model_1.Blog.find().populate('author'), query)
+    const blogQuery = new QueryBuilder_1.default(blog_model_1.Blog.find().populate('author').select('_id title content author'), query)
         .search(['title', 'content'])
         .sort()
         .filter();
@@ -73,7 +80,9 @@ const getAllBlogsFromDB = (query) => __awaiter(void 0, void 0, void 0, function*
     return result;
 });
 const getSingleBlogsFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.Blog.findById(id).populate('author');
+    const result = yield blog_model_1.Blog.findById(id)
+        .populate('author')
+        .select('_id title content author');
     return result;
 });
 exports.BlogServices = {
