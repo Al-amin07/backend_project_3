@@ -31,7 +31,7 @@ Follow these steps to set up and run the project locally.
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Al-amin07/carstore_backend.git
+https://github.com/Al-amin07/backend_project_3
 ```
 
 ## 2. Install Dependencies
@@ -39,7 +39,7 @@ git clone https://github.com/Al-amin07/carstore_backend.git
 Navigate to the project directory and install the necessary dependencies:
 
    ```bash
-   cd carstore_backend
+   cd backend_project_3
    npm install
    ```
 
